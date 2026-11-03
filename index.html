@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maison Lumière · Salon QR &amp; Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400&family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <header class="salon-header">
+    <div class="header-top">
+      <div class="brand-group">
+        <div class="brand-monogram" title="Maison Lumière Emblem">
+          <svg class="emblem-svg" viewBox="0 0 64 64" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="embGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d9a9"/>
+      <stop offset="50%" stop-color="#c99c60"/>
+      <stop offset="100%" stop-color="#8c622b"/>
+    </linearGradient>
+    <radialGradient id="embBg" cx="50%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#36281c"/>
+      <stop offset="100%" stop-color="#14100c"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#embBg)"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="14" fill="none" stroke="url(#embGold)" stroke-width="1.2" opacity="0.45"/>
+  <path d="M 18 52 L 18 27 A 14 14 0 0 1 46 27 L 46 52 Z" fill="none" stroke="url(#embGold)" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M 21 49 L 21 27 A 11 11 0 0 1 43 27 L 43 49" fill="none" stroke="url(#embGold)" stroke-width="0.75" opacity="0.5"/>
+  <path d="M 32 14 L 34.4 22.6 L 43 25 L 34.4 27.4 L 32 36 L 29.6 27.4 L 21 25 L 29.6 22.6 Z" fill="url(#embGold)"/>
+  <circle cx="32" cy="25" r="2.2" fill="#ffffff"/>
+  <line x1="32" y1="9" x2="32" y2="12" stroke="url(#embGold)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="21" y1="14" x2="23.5" y2="16.5" stroke="url(#embGold)" stroke-width="1.3" stroke-linecap="round"/>
+  <line x1="43" y1="14" x2="40.5" y2="16.5" stroke="url(#embGold)" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M 22 44 Q 32 37 42 44" fill="none" stroke="url(#embGold)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 25 48 Q 32 43 39 48" fill="none" stroke="url(#embGold)" stroke-width="1.3" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="32" cy="49" r="1.4" fill="#f5d9a9"/>
+</svg>
+        </div>
+        <div>
+          <h1 class="brand-name">Maison Lumière</h1>
+          <div class="brand-tagline">Haute Coiffure &amp; Sanctuary</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="station-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span id="headerCurrentLocation">Station 1</span>
+          <button class="station-select-btn" id="openLocationSwitchBtn">Change</button>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Dark/Light Mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Views Tab Navigation -->
+    <nav class="app-nav" id="mainViewNav">
+      <button class="nav-btn active" data-tab="clientView">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        Client Menu
+      </button>
+      <button class="nav-btn" data-tab="staffView">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        Staff Tablet (<span id="staffPendingCount">2</span>)
+      </button>
+      <button class="nav-btn" data-tab="ownerView">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        Owner Reports
+      </button>
+      <button class="nav-btn" data-tab="qrHubView">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        QR Stand Hub
+      </button>
+    </nav>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- TAB 1: CLIENT SERVICE MENU & BOOKING       -->
+  <!-- ========================================== -->
+  <main id="clientView">
+    <!-- Sleek Location Pill -->
+    <div class="location-notice" id="clientLocationNotice">
+      <div class="location-notice-text">
+        <span>✨ <span id="stationWelcomePrefix">Connected at</span> <b id="stationWelcomeName">Station 1</b></span>
+        <span class="text-muted">· Select a ritual or join the walk-in queue</span>
+      </div>
+      <button class="btn-outline btn-sm" id="switchTouchpointQuickBtn">Switch Station</button>
+    </div>
+
+    <!-- Active Request Live Tracker -->
+    <section id="clientActiveTracker" class="status-tracker-card hidden">
+      <div class="card-header" style="margin-bottom:4px;">
+        <div>
+          <span class="tracker-badge" id="trackerLiveBadge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Live Status: <span id="trackerCurrentStatus">New</span>
+          </span>
+          <h2 class="card-title" id="trackerServiceName">Signature Cut &amp; Style</h2>
+          <div class="card-subtitle" id="trackerMetaDetails">with Amara · 11:30 AM · Station 1</div>
+        </div>
+        <button class="btn-outline btn-sm" id="cancelRequestBtn">Cancel</button>
+      </div>
+
+      <div class="stepper-steps">
+        <div class="stepper-line"></div>
+        <div class="stepper-line-progress" id="stepperProgressBar" style="width: 15%;"></div>
+        <div class="step-node active" id="stepNode-New"><div class="step-circle">1</div><span class="step-label">Requested</span></div>
+        <div class="step-node" id="stepNode-Confirmed"><div class="step-circle">2</div><span class="step-label">Confirmed</span></div>
+        <div class="step-node" id="stepNode-Arrived"><div class="step-circle">3</div><span class="step-label">Arrived</span></div>
+        <div class="step-node" id="stepNode-In-service"><div class="step-circle">4</div><span class="step-label">In Service</span></div>
+        <div class="step-node" id="stepNode-Done"><div class="step-circle">5</div><span class="step-label">Done</span></div>
+      </div>
+
+      <div id="trackerWalkinQueueInfo" class="location-notice hidden" style="margin-top:12px; margin-bottom:0;">
+        <div class="location-notice-text">
+          <b class="text-gold">Walk-in Queue:</b> Position <b id="queuePositionText">#1</b> · Est. wait <span id="queueWaitTimeText">15 mins</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2-Column Workspace: Left Catalog, Right Sticky Booking -->
+    <div class="client-workspace-grid">
+      <!-- Left Column: Service Menu -->
+      <div>
+        <div class="card-header">
+          <div>
+            <h2 class="card-title serif" style="font-size: 28px;">Service Menu</h2>
+          </div>
+          <button class="btn-gold btn-sm" id="jumpToBookBtn">
+            Instant Queue / Book
+          </button>
+        </div>
+
+        <div class="category-chips" id="categoryChips">
+          <button class="chip-btn active" data-cat="all">All Rituals</button>
+          <button class="chip-btn" data-cat="hair">Hair Design</button>
+          <button class="chip-btn" data-cat="color">Color &amp; Gloss</button>
+          <button class="chip-btn" data-cat="treatment">Treatments</button>
+          <button class="chip-btn" data-cat="spa">Facial &amp; Spa</button>
+          <button class="chip-btn" data-cat="nails">Nail Care</button>
+          <button class="chip-btn" data-cat="bridal">Bridal Atelier</button>
+        </div>
+
+        <div class="services-grid" id="servicesCatalogGrid"></div>
+      </div>
+
+      <!-- Right Column: Sticky Booking Drawer -->
+      <aside class="sticky-booking-sidebar">
+        <section class="booking-panel" id="bookingSection">
+          <div class="card-header" style="margin-bottom:14px;">
+            <div>
+              <h2 class="card-title serif" style="font-size:24px;">Book or Join Queue</h2>
+            </div>
+            <span class="station-badge" style="padding:4px 12px; font-size:11.5px;"><span id="formStationLabel">Station 1</span></span>
+          </div>
+
+          <div class="booking-tabs">
+            <button class="booking-tab-btn active" id="modeWalkinBtn" data-mode="walkin">
+              ⚡ Join Walk-in Queue Now
+            </button>
+            <button class="booking-tab-btn" id="modeScheduleBtn" data-mode="schedule">
+              📅 Reserve Specific Time Slot
+            </button>
+          </div>
+
+          <form id="bookingRequestForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Service</label>
+                <select class="form-select" id="formServiceSelect" required></select>
+                <div id="serviceThumbPreviewBox" class="selected-service-preview-box"></div>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Stylist</label>
+                  <select class="form-select" id="formStylistSelect" required></select>
+                </div>
+                <div class="form-group" id="scheduledTimeGroup" style="display:none;">
+                  <label class="form-label">Time (Today)</label>
+                  <select class="form-select" id="formTimeSelect"></select>
+                </div>
+              </div>
+            </div>
+
+            <div class="addons-box">
+              <div class="addons-title">
+                <span>Optional Add-ons</span>
+                <span class="text-gold" id="addonsSummaryCost">+৳0</span>
+              </div>
+              <div class="addon-options" id="addonOptionsList"></div>
+            </div>
+
+            <div class="form-row-2" style="margin-bottom:14px;">
+              <div class="form-group">
+                <label class="form-label">Your Name *</label>
+                <input type="text" class="form-input" id="formClientName" placeholder="Full Name" autocomplete="name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mobile Phone *</label>
+                <input type="tel" class="form-input" id="formClientPhone" placeholder="017XXXXXXXX" autocomplete="tel" required>
+              </div>
+            </div>
+
+            <div class="consent-card">
+              <input type="text" class="form-input" id="formHairNotes" placeholder="Color formula, preferences, or allergy notes (optional)" style="padding:8px 12px; font-size:13px;">
+              <label class="consent-checkbox-label">
+                <input type="checkbox" id="formConsentCheck" class="addon-checkbox" checked>
+                <span>Consent to store formula &amp; patch-test safety notes privately.</span>
+              </label>
+            </div>
+
+            <div class="payment-policy-box">
+              <div class="policy-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+              </div>
+              <div class="policy-text">
+                <b>Pay at Salon:</b> No online hold. Settle directly via salon POS (bKash <code>01700-112233</code>, Card, or Cash).
+              </div>
+            </div>
+
+            <button type="submit" class="btn-gold btn-block" style="padding:13px; font-size:15px;" id="submitBookingBtn">
+              Send Booking Request
+            </button>
+          </form>
+        </section>
+      </aside>
+    </div>
+
+    <!-- Memberships & Packages -->
+    <section class="card" style="margin-top:16px;">
+      <div class="card-header" style="margin-bottom:8px;">
+        <div>
+          <h2 class="card-title serif">Memberships &amp; Packages</h2>
+          <p class="card-subtitle">Prepaid passes &amp; VIP privileges</p>
+        </div>
+        <span class="station-badge">Salon Exclusives</span>
+      </div>
+
+      <div class="packages-grid">
+        <div class="package-card">
+          <div>
+            <span class="station-badge" style="margin-bottom:10px; font-size:11px; padding:3px 10px;">5-Visit Pass</span>
+            <h3 class="serif" style="font-size:21px;">The Blowout Pass</h3>
+            <div style="font-size:24px; font-weight:700; color:var(--ink); margin:6px 0;">৳10,000 <span style="font-size:12px; color:var(--ink-muted); font-weight:normal;">(Save ৳2,500)</span></div>
+            <ul class="package-perks">
+              <li>✓ 5 Wash, cut &amp; signature blowout visits</li>
+              <li>✓ Shareable with family · 6-month validity</li>
+            </ul>
+          </div>
+          <button class="btn-outline btn-sm btn-block inquiry-pkg-btn" data-pkg="Blowout Pass">Request at Reception</button>
+        </div>
+
+        <div class="package-card featured">
+          <div>
+            <span class="station-badge" style="background:var(--gold-gradient); color:#fff; border:none; margin-bottom:10px; font-size:11px; padding:3px 10px;">VIP Tier</span>
+            <h3 class="serif" style="font-size:21px;">Lumière Gold Club</h3>
+            <div style="font-size:24px; font-weight:700; color:var(--ink); margin:6px 0;">৳15,000 <span style="font-size:12px; color:var(--ink-muted); font-weight:normal;">/ year</span></div>
+            <ul class="package-perks">
+              <li>✓ 15% off all services &amp; priority queue</li>
+              <li>✓ Monthly complimentary gloss &amp; private suite</li>
+            </ul>
+          </div>
+          <button class="btn-gold btn-sm btn-block inquiry-pkg-btn" data-pkg="Lumière Gold Club">Enroll at Reception</button>
+        </div>
+
+        <div class="package-card">
+          <div>
+            <span class="station-badge" style="margin-bottom:10px; font-size:11px; padding:3px 10px;">Bridal Suite</span>
+            <h3 class="serif" style="font-size:21px;">Bridal Atelier Package</h3>
+            <div style="font-size:24px; font-weight:700; color:var(--ink); margin:6px 0;">৳35,000 <span style="font-size:12px; color:var(--ink-muted); font-weight:normal;">complete</span></div>
+            <ul class="package-perks">
+              <li>✓ Full trial rehearsal + wedding day couture look</li>
+              <li>✓ Includes 2 complimentary bridesmaid blowouts</li>
+            </ul>
+          </div>
+          <button class="btn-outline btn-sm btn-block inquiry-pkg-btn" data-pkg="Bridal Concierge">Request Consultation</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Loyalty & Feedback -->
+    <div class="client-bottom-grid">
+      <!-- Loyalty Stamp Card -->
+      <section class="loyalty-banner" id="loyaltySection">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="qr-location-title" style="color:#d4a96e;">Privilege Club</span>
+            <span style="font-size:12px; color:#d4a96e; font-weight:600;">5 Visits = Free Ritual</span>
+          </div>
+          <h2 class="serif" style="font-size:26px; color:#fff; margin-bottom:6px;">Lumière Stamp Rewards</h2>
+          <p style="font-size:13px; color:#cabda8;">Collect 5 completed visit stamps for a complimentary blowout &amp; masque.</p>
+
+          <div style="display:flex; gap:8px; margin-top:16px;">
+            <input type="tel" class="form-input" id="loyaltyPhoneInput" placeholder="Enter mobile number" style="background:rgba(255,255,255,0.08); border-color:rgba(212,169,110,0.4); color:#fff;">
+            <button class="btn-outline btn-sm" id="loyaltyCheckBtn" style="color:#d4a96e; border-color:#d4a96e; white-space:nowrap;">Check Card</button>
+          </div>
+
+          <div class="stamp-grid" id="stampGridContainer"></div>
+        </div>
+        <div id="loyaltyStatusMessage" style="font-size:13px; color:#d4a96e; font-weight:500;">
+          Enter your phone number to view active stamps.
+        </div>
+      </section>
+
+      <!-- Feedback & Google Review -->
+      <section class="card" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div class="card-header" style="margin-bottom:8px;">
+            <div>
+              <h2 class="card-title serif">How Was Your Visit?</h2>
+              <p class="card-subtitle">Private note to salon management</p>
+            </div>
+          </div>
+
+          <form id="feedbackForm">
+            <div class="star-rating" id="feedbackStarRating">
+              <button type="button" class="star-btn" data-val="1">★</button>
+              <button type="button" class="star-btn" data-val="2">★</button>
+              <button type="button" class="star-btn" data-val="3">★</button>
+              <button type="button" class="star-btn" data-val="4">★</button>
+              <button type="button" class="star-btn" data-val="5">★</button>
+            </div>
+
+            <div class="form-group" style="margin-bottom:14px;">
+              <textarea class="form-textarea" id="feedbackComments" rows="3" placeholder="Share private feedback about your stylist or visit..."></textarea>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+              <button type="submit" class="btn-gold" id="submitFeedbackBtn">Submit Private Feedback</button>
+              <div style="font-size:12px;">
+                <a href="https://www.google.com/search?q=Maison+Lumiere+Salon+Reviews" target="_blank" rel="noopener" style="color:var(--gold-dark); font-weight:600; text-decoration:underline;">
+                  Review on Google ⭐
+                </a>
+                <span style="font-size:11px; display:block; color:var(--ink-muted);">(Optional · Rewards never depend on reviews)</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- TAB 2: SEPARATE STAFF DASHBOARD (TABLET)   -->
+  <!-- ========================================== -->
+  <section id="staffView" class="hidden">
+    <div class="card-header">
+      <div>
+        <h2 class="card-title serif" style="font-size:28px;">Floor &amp; Station Queue</h2>
+        <p class="card-subtitle">Confirm bookings, update live stages &amp; copy records into salon POS</p>
+      </div>
+      <button class="btn-gold" id="staffAddWalkinModalBtn">
+        + Floor Walk-in
+      </button>
+    </div>
+
+    <div class="filter-bar" id="staffFilterBar">
+      <button class="filter-btn active" data-filter="all">All Bookings (<span id="countFilterAll">0</span>)</button>
+      <button class="filter-btn" data-filter="New">New Requests (<span id="countFilterNew">0</span>)</button>
+      <button class="filter-btn" data-filter="Confirmed">Confirmed (<span id="countFilterConfirmed">0</span>)</button>
+      <button class="filter-btn" data-filter="Arrived">In Lounge / Arrived (<span id="countFilterArrived">0</span>)</button>
+      <button class="filter-btn" data-filter="In-service">In Service (<span id="countFilterInService">0</span>)</button>
+      <button class="filter-btn" data-filter="Done">Completed (<span id="countFilterDone">0</span>)</button>
+    </div>
+
+    <div id="staffBookingsList"></div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- TAB 3: OWNER & MANAGER REPORTS             -->
+  <!-- ========================================== -->
+  <section id="ownerView" class="hidden">
+    <div class="card-header">
+      <div>
+        <h2 class="card-title serif" style="font-size:28px;">Owner Analytics &amp; Reports</h2>
+        <p class="card-subtitle">Bookings, repeat client retention, busy hours &amp; catalog management</p>
+      </div>
+      <button class="btn-outline btn-sm" id="ownerExportCsvBtn">
+        Export CSV Summary
+      </button>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Total Bookings</span>
+        <div class="kpi-value" id="kpiTotalBookings">0</div>
+        <span class="kpi-sub">Today &amp; active queue</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Unique Clients</span>
+        <div class="kpi-value" id="kpiUniqueClients">0</div>
+        <span class="kpi-sub" id="kpiRepeatClientsSub">0 repeat guests</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Repeat Rate</span>
+        <div class="kpi-value text-gold" id="kpiRepeatRate">0%</div>
+        <span class="kpi-sub">Client retention</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Est. Floor Value</span>
+        <div class="kpi-value" id="kpiTotalRevenue">৳0</div>
+        <span class="kpi-sub">Direct salon POS</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Average Rating</span>
+        <div class="kpi-value text-ok" id="kpiAvgRating">5.0 ★</div>
+        <span class="kpi-sub" id="kpiReviewCount">0 evaluations</span>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:24px; margin-bottom:24px;">
+      <div class="card" style="margin-bottom:0;">
+        <h3 class="card-title serif" style="font-size:20px;">Busy Hours</h3>
+        <p class="card-subtitle">Hourly appointment &amp; walk-in demand</p>
+        <div class="chart-container" id="busyHoursChart"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:0;">
+        <h3 class="card-title serif" style="font-size:20px;">QR Station Scans</h3>
+        <p class="card-subtitle">Bookings by physical QR touchpoint</p>
+        <div class="chart-container" id="qrAttributionChart"></div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:24px; margin-bottom:24px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title serif" style="font-size:20px;">Service Catalog &amp; Thumbnails</h3>
+            <p class="card-subtitle">Active rituals, durations &amp; media</p>
+          </div>
+        </div>
+        <div id="ownerServicesTable"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title serif" style="font-size:20px;">Stylist Availability</h3>
+            <p class="card-subtitle">Working hours &amp; station assignments</p>
+          </div>
+        </div>
+        <div id="stylistRosterTable"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3 class="card-title serif" style="font-size:20px;">Client Feedback Log</h3>
+          <p class="card-subtitle">Private ratings &amp; guest notes</p>
+        </div>
+      </div>
+      <div id="ownerFeedbackList"></div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- TAB 4: QR CODE HUB & PRINT STATION STANDS  -->
+  <!-- ========================================== -->
+  <section id="qrHubView" class="hidden">
+    <div class="card-header">
+      <div>
+        <h2 class="card-title serif" style="font-size:28px;">QR Stand &amp; Touchpoint Hub</h2>
+        <p class="card-subtitle">Unique scannable stands for reception, stations, waiting lounge &amp; window</p>
+      </div>
+      <button class="btn-gold btn-sm" id="printActiveQrStandBtn">
+        Print Active Stand
+      </button>
+    </div>
+
+    <div class="category-chips" id="qrStationChips">
+      <button class="chip-btn active" data-loc="Station 1">Station 1 (Mirror)</button>
+      <button class="chip-btn" data-loc="Station 2">Station 2 (Color)</button>
+      <button class="chip-btn" data-loc="Station 3">Station 3 (Spa)</button>
+      <button class="chip-btn" data-loc="Reception Desk">Reception Counter</button>
+      <button class="chip-btn" data-loc="Waiting Lounge">Waiting Lounge</button>
+      <button class="chip-btn" data-loc="Storefront Window">Salon Window 24/7</button>
+      <button class="chip-btn" data-loc="Social Bio">Social Media Bio</button>
+    </div>
+
+    <div style="display:flex; justify-content:center; margin:24px 0;">
+      <div class="qr-stand-card" id="printableStandCard" style="max-width:400px; width:100%;">
+        <div class="brand-monogram" style="width:52px; height:52px;">
+          <svg class="emblem-svg" viewBox="0 0 64 64" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="embGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d9a9"/>
+      <stop offset="50%" stop-color="#c99c60"/>
+      <stop offset="100%" stop-color="#8c622b"/>
+    </linearGradient>
+    <radialGradient id="embBg" cx="50%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#36281c"/>
+      <stop offset="100%" stop-color="#14100c"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#embBg)"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="14" fill="none" stroke="url(#embGold)" stroke-width="1.2" opacity="0.45"/>
+  <path d="M 18 52 L 18 27 A 14 14 0 0 1 46 27 L 46 52 Z" fill="none" stroke="url(#embGold)" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M 21 49 L 21 27 A 11 11 0 0 1 43 27 L 43 49" fill="none" stroke="url(#embGold)" stroke-width="0.75" opacity="0.5"/>
+  <path d="M 32 14 L 34.4 22.6 L 43 25 L 34.4 27.4 L 32 36 L 29.6 27.4 L 21 25 L 29.6 22.6 Z" fill="url(#embGold)"/>
+  <circle cx="32" cy="25" r="2.2" fill="#ffffff"/>
+  <line x1="32" y1="9" x2="32" y2="12" stroke="url(#embGold)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="21" y1="14" x2="23.5" y2="16.5" stroke="url(#embGold)" stroke-width="1.3" stroke-linecap="round"/>
+  <line x1="43" y1="14" x2="40.5" y2="16.5" stroke="url(#embGold)" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M 22 44 Q 32 37 42 44" fill="none" stroke="url(#embGold)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 25 48 Q 32 43 39 48" fill="none" stroke="url(#embGold)" stroke-width="1.3" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="32" cy="49" r="1.4" fill="#f5d9a9"/>
+</svg>
+        </div>
+        <div class="qr-salon-emblem">MAISON LUMIÈRE</div>
+        <div class="qr-location-title" id="standLocationTitle">Station 1 · Haircut &amp; Blowout</div>
+
+        <div class="qr-svg-wrapper" id="qrSvgWrapper"></div>
+
+        <p class="qr-stand-instructions">
+          Scan to browse our service menu, book your stylist, or join the walk-in queue.
+        </p>
+
+        <button class="btn-outline btn-sm btn-block" id="simulateScanBtn" style="margin-top:6px; color:#1e1813; border-color:#d4c8b8;">
+          🚀 Simulate Client Scanning Here
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Modal: Switch Station / Location -->
+<div class="modal-overlay" id="locationModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="serif" style="font-size:22px;">Switch QR Touchpoint</h3>
+      <button class="close-modal-btn" id="closeLocationModalBtn">&times;</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;" id="locationPickerList"></div>
+  </div>
+</div>
+
+<!-- Modal: Staff Quick Walk-In Entry -->
+<div class="modal-overlay" id="walkinModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="serif" style="font-size:22px;">Add Floor Walk-in Client</h3>
+      <button class="close-modal-btn" id="closeWalkinModalBtn">&times;</button>
+    </div>
+    <form id="staffWalkinForm">
+      <div class="form-group" style="margin-bottom:12px;">
+        <label class="form-label">Client Name *</label>
+        <input type="text" class="form-input" id="staffInputName" placeholder="Guest Name" required>
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label class="form-label">Phone Number *</label>
+        <input type="tel" class="form-input" id="staffInputPhone" placeholder="Mobile Number" required>
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label class="form-label">Service *</label>
+        <select class="form-select" id="staffInputService" required></select>
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label class="form-label">Assigned Stylist</label>
+        <select class="form-select" id="staffInputStylist"></select>
+      </div>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label class="form-label">Station / Chair</label>
+        <select class="form-select" id="staffInputStation">
+          <option>Station 1</option>
+          <option>Station 2</option>
+          <option>Station 3</option>
+          <option>Waiting Lounge</option>
+          <option>Reception Desk</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-gold btn-block">Add to Live Floor Queue</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
